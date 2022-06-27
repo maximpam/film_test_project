@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\DBConnection;
 use App\Request;
+use PDO;
 use PDOException;
 
 class FilmAddController extends BaseController
