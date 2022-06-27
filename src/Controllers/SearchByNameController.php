@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\DBConnection;
 use App\Request;
+use PDO;
 use PDOException;
 
 require_once ('BaseController.php');

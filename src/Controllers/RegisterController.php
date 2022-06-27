@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\DBConnection;
 use App\Request;
+use PDOException;
 
 
 class RegisterController extends BaseController
@@ -43,7 +45,7 @@ class RegisterController extends BaseController
             try {
                 $query->execute([
                     'login' => $request->getData()['login'],
-                    'password' => $request->getData()['password']
+                    'password' => password_hash( $request->getData()['password'], PASSWORD_DEFAULT)
                 ]);
                 header('Location: /');
             } catch (PDOException $e) {

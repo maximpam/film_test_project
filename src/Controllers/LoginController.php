@@ -40,16 +40,16 @@ class LoginController extends BaseController
     private function login(Request $request)
     {
         $connection = new DBConnection();
-        $sql = 'SELECT * FROM users WHERE login = :login AND password = :password';
+        $sql = 'SELECT * FROM users WHERE login = :login';
         $query = $connection::$pdo->prepare($sql);
         try {
             $query->execute([
-                'login' => $request->getData()['login'],
-                'password' => $request->getData()['password']
+                'login' => $request->getData()['login']
             ]);
-
-            if ($query->rowCount()>0){
-                $_SESSION['user_login']=$query->fetch(PDO::FETCH_OBJ)->login;
+        $result = $query->fetch(PDO::FETCH_OBJ);
+            if ($query->rowCount()>0 &&
+            password_verify( $request->getData()['password'], $result->password)){
+                $_SESSION['user_login']=$result->login;
                 header('Location: /');
             } else {
                 $_SESSION["alert"] = 'No such user';
