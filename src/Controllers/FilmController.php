@@ -32,16 +32,13 @@ class FilmController extends BaseController
     }
 
     public static function getFilms(Request $request){
-        if (empty($request->getData())){
+
+            $order =  $request->getData()['order'] ?? "ASC";
             $connection = new DBConnection();
-            $sql = 'SELECT id, title FROM films ORDER BY films.title ASC';
+            $sql = 'SELECT id, title FROM films ORDER BY films.title   '.$order.' ';
             $query = $connection::$pdo->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_OBJ);
-        }else{
-
-           return $_SESSION["alert"] = 'No such user';
-        }
 
     }
     public function getFilmbyId(Request $request):array{

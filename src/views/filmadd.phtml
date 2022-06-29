@@ -26,22 +26,33 @@ if (!empty($_SESSION['user_login']))
 </div>
 ';
 ?>
+
+<?php
+
+if (!empty($_SESSION["alert"])){
+    echo ' <div class="alert alert-warning" role="alert">
+                    ' .$_SESSION["alert"] . '
+                </div>';
+}
+unset($_SESSION["alert"]);
+?>
 <div class="container-sm">
     <div class="row justify-content-center">
         <div class="col-md-4">
             <form action="/addfilm" method="post">
                 <div class="mb-2">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="Title" placeholder="Input film title">
+                    <input required type="text" class="form-control" id="title" name="Title" placeholder="Input film title">
                 </div>
                 <div class="mb-2">
                     <label for="year" class="form-label">Year</label>
-                    <input type="number" max="9999" maxlength="4" class="form-control" id="year" name="ReleaseYear" placeholder="Input year of production">
+                    <input required type="number" max="9999" maxlength="4" class="form-control" id="year" name="ReleaseYear" placeholder="Input year of production">
                 </div>
+
                 <div class="mb-2">
-                    <label for="format" class="form-label">Example label</label>
-                    <select class="form-select" id="Format" name="format"  aria-label="Disabled select example">
-                        <option selected disabled>Open this select menu</option>
+                    <label for="format" class="form-label">Choose Film Format</label>
+                    <select  class="form-select" id="format" name="Format"  aria-label="Disabled select example" required>
+                        <option value=""selected disabled>Open this select menu</option>
                         <option value="VHS">VHS</option>
                         <option value="DVD">DVD</option>
                         <option value="Blu-ray">Blu-ray</option>
@@ -49,7 +60,7 @@ if (!empty($_SESSION['user_login']))
                 </div>
                 <div class="mb-2">
                     <label for="actors" class="form-label">Actors</label>
-                    <textarea class="form-control" id="Stars" name="actors" rows="3" placeholder="Will Sith, Bruce Willis..."></textarea>
+                    <textarea required class="form-control" id="Stars" name="Stars" rows="3" placeholder="Will Sith, Bruce Willis..."></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -19,15 +19,15 @@
             <form action="/register" method="post">
                 <div class="mb-2">
                     <label for="login" class="form-label">Your Login</label>
-                    <input type="text" class="form-control" id="login" name="login" placeholder="Your Login">
+                    <input required type="text" class="form-control" id="login" name="login" placeholder="Your Login">
                 </div>
                 <div class="mb-2">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input required type="password" class="form-control" id="password" name="password">
                 </div>
                 <div class="mb-2">
                         <label for="confirmed_password" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmed_password" name="$confirmed_password">
+                    <input required type="password" class="form-control" id="confirmed_password" name="$confirmed_password">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

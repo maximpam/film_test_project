@@ -30,11 +30,6 @@ class FilmDeleteController extends BaseController
 
     private function deleteFilmbyId(Request $request):void{
         $connection = new DBConnection();
-        $sql = 'DELETE FROM films_actors WHERE films_actors.film_id = :id';
-        $query = $connection::$pdo->prepare($sql);
-        $query->execute([
-            "id"=>$request->getData()['id']
-        ]);
         $sql = 'DELETE FROM films WHERE id = :id';
         $query = $connection::$pdo->prepare($sql);
         $query->execute([

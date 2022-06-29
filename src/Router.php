@@ -36,7 +36,8 @@ class Router {
             '/filmdelete' => FilmDeleteController::class,
             '/searchbyactor' => SearchByActorController::class,
             '/searchbyname' => SearchByNameController::class,
-            '/upload' =>  FileUploadController::class
+            '/upload' =>  FileUploadController::class,
+            default => IndexController::class
         };
 
         return new $className($request);

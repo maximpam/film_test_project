@@ -22,6 +22,7 @@ class DBConnection
 
         $dsn = 'mysql:host=' . self::$host . ';dbname=' . self::$db_name;
         self::$pdo = new PDO($dsn, self::$user, self::$password);
+        self::$pdo->exec("set names utf8mb4");
     }
 
 

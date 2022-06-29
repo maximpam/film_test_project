@@ -26,6 +26,7 @@ class SearchByActorController extends BaseController
     public function index(Request $request){
 
         if ($request->isLogin() === true){
+            $_SESSION['searched_actor'] = $request->getData()['actor'];
 
             $films = $this->getFilmbyActor($request);
             require_once ('views/index.phtml');
@@ -37,11 +38,11 @@ class SearchByActorController extends BaseController
     public function getFilmbyActor(Request $request):array{
 
         $connection = new DBConnection();
-        $sql = 'SELECT * FROM actors WHERE full_name = :actor';
+        $sql = 'SELECT * FROM actors WHERE full_name LIKE :actor';
         $query = $connection::$pdo->prepare($sql);
         try {
             $query->execute([
-                'actor' => $request->getData()['actor'],
+                'actor' =>'%'.$request->getData()['actor'].'%',
             ]);
             if ($query->rowCount()>0){
                 $actor_id = $query->fetch(PDO::FETCH_OBJ)->id;

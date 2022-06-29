@@ -24,6 +24,7 @@ class SearchByNameController extends BaseController
     public function index($request){
 
         if ($request->isLogin() === true){
+            $_SESSION['searched_name'] = $request->getData()['name'];
             $films = $this->getFilmByName($request);
             require_once ('views/index.phtml');
         } else{
@@ -32,13 +33,12 @@ class SearchByNameController extends BaseController
     }
 
     public function getFilmByName(Request $request):array{
-
         $connection = new DBConnection();
-        $sql = 'SELECT * FROM films WHERE title = :name';
+        $sql = 'SELECT * FROM films WHERE title LIKE :name';
         $query = $connection::$pdo->prepare($sql);
         try {
             $query->execute([
-                'name' => $request->getData()['name'],
+                'name' => '%'.$request->getData()['name'].'%',
             ]);
             if ($query->rowCount()>0){
                 $result =  $query->fetchAll(PDO::FETCH_OBJ);
